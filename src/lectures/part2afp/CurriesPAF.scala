@@ -87,5 +87,16 @@ object CurriesPAF extends App {
       - PAF
    */
 
+  byName(23)
+  byName(method)
+  byName(parenMethod())
+  byName(parenMethod) // ok but beware ==> byName(parenMethod())
+  byName((() => 42)())
+//  byName(parenMethod _) NOK
 
+//  byFunction(42) NOK
+//  byFunction(method)  NOK !!!!!!!!! does not do ETA-expansion
+  byFunction(parenMethod) // OK compiler does ETA-expansion
+  byFunction(() => 42)
+  byFunction(parenMethod _) // also works, but warning - unnecessary
 }
